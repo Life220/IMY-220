@@ -7,7 +7,9 @@ class Login extends React.Component
   {
     return (
       <div>
-        <Navigation />
+        <header>
+          <Navigation />
+        </header>
         <h1>RecordShare</h1>
         <h3>Username</h3>
         <input type="text" placeholder="John1234"></input>

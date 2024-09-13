@@ -22,7 +22,7 @@ class App extends React.Component
           </Routes>
         </Router>
         <footer>
-          Hello
+          Pause/Play
         </footer>
       </div>
     );

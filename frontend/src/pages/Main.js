@@ -9,7 +9,9 @@ class Main extends React.Component
   {
     return (
       <div>
+        <header>
           <Navigation />
+        </header>
         <div id="searchButton">
           <h3>Search:</h3>
           <input type="text" placeholder="Rick Astley..."></input>

@@ -10,7 +10,9 @@ class Playlist extends React.Component
     {
         return (
             <div>
-                <Navigation />
+                <header>
+                    <Navigation />
+                </header>
                 <div id="onPages">
                     <img alt="logo"/>
                     <img alt="Back" />

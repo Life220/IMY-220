@@ -1,6 +1,8 @@
 import React from "react";
 import "../../public/assets/css/onPages.css";
 import logo from "../../public/assets/images/logo.png"
+import profilePic from "../../public/assets/images/Rick.png"
+import popularPic from "../../public/assets/images/popular.png"
 import Navigation from "../components/Navigation";
 import GetProfile from "../components/getProfileDetails";
 
@@ -19,7 +21,7 @@ const profile = {
         username: "JackySparrow"
     },
     playlists: [
-        { rank: 1, name: "Gave You Up", image:"path/to/top_50_global.jpg", songs:[
+        { rank: 1, name: "Gave You Up", image:popularPic, songs:[
             { rank: 1, title: "Never Gonna Give You Up", artist: "Rick Astley" },
             { rank: 2, title: "Blinding Lights", artist: "Justin Bieber" },
             { rank: 3, title: "Never Really Over", artist: "Katy Perry" },
@@ -29,7 +31,7 @@ const profile = {
         { rank: 4, name: "Rock Classics", image: "path/to/rock_classics.jpg" },
         { rank: 5, name: "Chill Hits", image: "path/to/chill_hits.jpg" }
     ],
-    image: ""
+    image: profilePic
 };
 
 class Profile extends React.Component {
@@ -37,7 +39,9 @@ class Profile extends React.Component {
         return (
             <div id="Profile">
                 <div id="profileLogo">
-                    <Navigation />
+                    <header>
+                        <Navigation />
+                    </header>
                     <img src={logo} alt="logo" />
                 </div>
                 <img alt="Back" />

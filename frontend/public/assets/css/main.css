@@ -7,6 +7,11 @@ body, html
     background: linear-gradient(to bottom, #004b41, #002b21);
 }
 
+header
+{
+    border-bottom: 2px solid #002b33;
+}
+
 footer
 {
     color: white;
@@ -78,7 +83,7 @@ footer
 {
     display: flex;
     flex-direction: row;
-    margin-right: 1rem;
+    margin-right: 3rem;
 }
 
 #Tops p

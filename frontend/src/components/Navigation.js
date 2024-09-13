@@ -30,7 +30,9 @@ class Navigation extends React.Component
         return (
             <div id="NavTab">
                 <button onClick={this.toggleNavigation}>
-                    {this.state.showNav ? "Hide Menu" : "Show Menu"}
+                    <h2>
+                        {this.state.showNav ? "Menu" : "Menu"}
+                    </h2>
                 </button>
                 {this.state.showNav && (
                     <div id="Navigation" onMouseLeave={this.closeNavigation}>
