@@ -38,7 +38,7 @@ class Navigation extends React.Component
                         <nav>
                             <Link to="/">Home</Link>
                             <Link to="/login">Login</Link>
-                            <Link to="/Profile">Login</Link>
+                            <Link to="/profile">Profile</Link>
                         </nav>
                     </div>)
                 }

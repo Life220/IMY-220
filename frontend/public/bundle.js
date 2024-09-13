@@ -5132,8 +5132,8 @@ var App = /*#__PURE__*/function (_React$Component) {
         path: "/playlist",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Playlist__WEBPACK_IMPORTED_MODULE_3__["default"], null)
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
-        path: "/Profile",
-        element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Playlist__WEBPACK_IMPORTED_MODULE_3__["default"], null)
+        path: "/profile",
+        element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_4__["default"], null)
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("footer", null, "Hello"));
     }
   }]);
@@ -5214,8 +5214,8 @@ var Navigation = /*#__PURE__*/function (_React$Component) {
       }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/login"
       }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/Profile"
-      }, "Login"))));
+        to: "/profile"
+      }, "Profile"))));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
@@ -5508,6 +5508,113 @@ var GetPlaylist = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/src/components/getProfileDetails.js":
+/*!******************************************************!*\
+  !*** ./frontend/src/components/getProfileDetails.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+
+var GetProfile = /*#__PURE__*/function (_React$Component) {
+  function GetProfile(props) {
+    var _this;
+    _classCallCheck(this, GetProfile);
+    _this = _callSuper(this, GetProfile, [props]);
+    _this.state = {
+      username: _this.props.profile.username,
+      fullName: _this.props.profile.fullName
+    };
+    _this.handleUsermameChange = _this.handleUsermameChange.bind(_this);
+    _this.handleFullNameChange = _this.handleFullNameChange.bind(_this);
+    return _this;
+  }
+  _inherits(GetProfile, _React$Component);
+  return _createClass(GetProfile, [{
+    key: "handleUsermameChange",
+    value: function handleUsermameChange(event) {
+      this.setState({
+        username: event.target.value
+      });
+    }
+  }, {
+    key: "handleFullNameChange",
+    value: function handleFullNameChange(event) {
+      this.setState({
+        fullName: event.target.value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var profile = this.props.profile;
+      var mostPopularPlaylist = profile.playlists.reduce(function (prev, current) {
+        return prev.rank < current.rank ? prev : current;
+      }, {});
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "getProfile"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "leftProfile"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: profile.image,
+        alt: profile.username
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "titles"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "title"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Username: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        value: this.state.username,
+        onChange: this.handleUsermameChange
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "title"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Full Name: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        value: this.state.fullName,
+        onChange: this.handleFullNameChange
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "bio"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Bio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, profile.bio))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Achievements: "), profile.achievements.map(function (achievement, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+          key: index
+        }, achievement.rank, ". ", achievement.achievements);
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "rightProfile"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Followers: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, profile.followers.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Following: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, profile.following.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Most Popular Playlist: "), mostPopularPlaylist && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, mostPopularPlaylist.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: mostPopularPlaylist.image,
+        alt: mostPopularPlaylist.name
+      }), mostPopularPlaylist.songs.map(function (song, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          key: index
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+          style: {
+            color: song.rank === 1 ? "gold" : song.rank === 2 ? "silver" : song.rank === 3 ? "#d19900" : "#00ceb2"
+          }
+        }, song.rank, ". ", song.title, " by ", song.artist));
+      })))));
+    }
+  }]);
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GetProfile);
+
+/***/ }),
+
 /***/ "./frontend/src/components/songsList.js":
 /*!**********************************************!*\
   !*** ./frontend/src/components/songsList.js ***!
@@ -5781,9 +5888,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _public_assets_css_onPages_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../public/assets/css/onPages.css */ "./frontend/public/assets/css/onPages.css");
-/* harmony import */ var _components_Navigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Navigation */ "./frontend/src/components/Navigation.js");
-/* harmony import */ var _components_songsList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/songsList */ "./frontend/src/components/songsList.js");
-/* harmony import */ var _components_getPlaylist__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/getPlaylist */ "./frontend/src/components/getPlaylist.js");
+/* harmony import */ var _public_assets_images_logo_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../public/assets/images/logo.png */ "./frontend/public/assets/images/logo.png");
+/* harmony import */ var _components_Navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Navigation */ "./frontend/src/components/Navigation.js");
+/* harmony import */ var _components_getProfileDetails__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/getProfileDetails */ "./frontend/src/components/getProfileDetails.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -5802,6 +5909,59 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 
 
 
+var profile = {
+  username: "Ricky117",
+  fullName: "Rick Astley",
+  bio: "Never gonna give you up",
+  achievements: [{
+    rank: "2",
+    achievements: "Highest Rated Playlist"
+  }, {
+    rank: "7",
+    achievements: "Most Followed"
+  }],
+  followers: {
+    username: "JackySparrow"
+  },
+  following: {
+    username: "JackySparrow"
+  },
+  playlists: [{
+    rank: 1,
+    name: "Gave You Up",
+    image: "path/to/top_50_global.jpg",
+    songs: [{
+      rank: 1,
+      title: "Never Gonna Give You Up",
+      artist: "Rick Astley"
+    }, {
+      rank: 2,
+      title: "Blinding Lights",
+      artist: "Justin Bieber"
+    }, {
+      rank: 3,
+      title: "Never Really Over",
+      artist: "Katy Perry"
+    }]
+  }, {
+    rank: 2,
+    name: "RapCaviar",
+    image: "path/to/rap_caviar.jpg"
+  }, {
+    rank: 3,
+    name: "Today's Top Hits",
+    image: "path/to/todays_top_hits.jpg"
+  }, {
+    rank: 4,
+    name: "Rock Classics",
+    image: "path/to/rock_classics.jpg"
+  }, {
+    rank: 5,
+    name: "Chill Hits",
+    image: "path/to/chill_hits.jpg"
+  }],
+  image: ""
+};
 var Profile = /*#__PURE__*/function (_React$Component) {
   function Profile() {
     _classCallCheck(this, Profile);
@@ -5811,13 +5971,18 @@ var Profile = /*#__PURE__*/function (_React$Component) {
   return _createClass(Profile, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        id: "onPages"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "Profile"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "profileLogo"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: _public_assets_images_logo_png__WEBPACK_IMPORTED_MODULE_2__["default"],
         alt: "logo"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         alt: "Back"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(GetProfile, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(GetPlaylists, null))));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_getProfileDetails__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        profile: profile
+      }));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
@@ -6082,7 +6247,85 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#onPages
 {
     background-color: rgb(0, 17, 15);
     padding: 0.5rem 1rem 1rem 0.5rem;
-}`, "",{"version":3,"sources":["webpack://./frontend/public/assets/css/onPages.css"],"names":[],"mappings":"AAAA;;IAEI,aAAa;IACb,mBAAmB;IACnB,8BAA8B;AAClC;;AAEA,sBAAsB;AACtB,aAAa;AACb;;IAEI,aAAa;IACb,sBAAsB;IACtB,gBAAgB;IAChB,kBAAkB;IAClB,6BAA6B;IAC7B,sCAAsC;IACtC,kBAAkB;IAClB,mBAAmB;IACnB,oBAAoB;IACpB;;;;kCAI8B;AAClC;;AAEA;;IAEI,aAAa;IACb,sBAAsB;IACtB,iBAAiB;IACjB,sCAAsC;IACtC,eAAe;AACnB;;AAEA;;IAEI,YAAY;IACZ,aAAa;AACjB;;AAEA;;IAEI,eAAe;AACnB;;AAEA,gBAAgB;AAChB;;IAEI,YAAY;AAChB;;AAEA;;IAEI,aAAa;IACb,mBAAmB;IACnB,SAAS;AACb;;;AAGA;;IAEI,aAAa;IACb,sBAAsB;IACtB,mBAAmB;IACnB,sCAAsC;IACtC,kBAAkB;IAClB,mBAAmB;IACnB,oBAAoB;IACpB;;;;8CAI0C;AAC9C;;AAEA;;IAEI,YAAY;IACZ,sCAAsC;IACtC,eAAe;AACnB;;AAEA;;IAEI,aAAa;IACb,sBAAsB;IACtB,eAAe;AACnB;;AAEA;;IAEI,gBAAgB;AACpB;;AAEA;;IAEI,gCAAgC;IAChC,gCAAgC;AACpC","sourcesContent":["#onPages\n{\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n/*-----Playlist----- */\n/* SongList */\n#songsList\n{\n    display: flex;\n    flex-direction: column;\n    max-width: 20rem;\n    text-align: center;\n    justify-content: space-around;\n    background-color: rgba(0, 0, 0, 0.212);\n    padding-left: 1rem;\n    padding-right: 1rem;\n    padding-bottom: 1rem;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),\n    0 4px 8px rgba(0, 0, 0, 0.1),\n    0 8px 16px rgba(0, 0, 0, 0.1),\n    0 16px 32px rgba(0, 0, 0, 0.1),\n    0 32px 64px rgba(0, 0, 0, 0.1);\n}\n\n#songs\n{\n    display: flex;\n    flex-direction: column;\n    text-align: start;\n    background-color: rgba(0, 0, 0, 0.349);\n    padding: 0.5rem;\n}\n\n#songs p\n{\n    margin: 0rem;\n    padding: 0rem;\n}\n\n#song\n{\n    padding: 0.5rem;\n}\n\n/* GetPlaylist */\n#Playlist\n{\n    width: 30rem;\n}\n\n#topOfPlay\n{\n    display: flex;\n    align-items: center;\n    gap: 2rem;\n}\n\n\n#bottomOfPlay\n{\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    background-color: rgba(0, 0, 0, 0.212);\n    padding-left: 1rem;\n    padding-right: 1rem;\n    padding-bottom: 1rem;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),\n                0 4px 8px rgba(0, 0, 0, 0.1),\n                0 8px 16px rgba(0, 0, 0, 0.1),\n                0 16px 32px rgba(0, 0, 0, 0.1),\n                0 32px 64px rgba(0, 0, 0, 0.1);\n}\n\n#comments\n{\n    width: 27rem;\n    background-color: rgba(0, 0, 0, 0.349);\n    padding: 0.5rem;\n}\n\n#comment\n{\n    display: flex;\n    flex-direction: column;\n    padding: 0.5rem;\n}\n\n#comment p\n{\n    margin: 0.2rem 0;\n}\n\n#content\n{\n    background-color: rgb(0, 17, 15);\n    padding: 0.5rem 1rem 1rem 0.5rem;\n}"],"sourceRoot":""}]);
+}
+
+
+/* Profile */
+#Profile
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#Profile img
+{
+    height: 10rem;
+}
+
+#profileLogo
+{
+    display: flex;
+    flex-direction: column;
+    height: 27rem;
+    justify-content: space-between;
+}
+
+#profileLogo profileLogo
+{
+    top: 0;
+}
+
+/* GetProfile */
+#getProfile
+{
+    display: flex;
+    flex-direction: row;
+    column-gap: 12rem;
+}
+
+#leftProfile
+{
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    border: 2px solid black;
+    align-items: center;
+    padding: 2rem;
+    margin-top: 2rem;
+    background-color: rgba(0, 0, 0, 0.295);
+}
+
+#titles
+{
+    display: flex;
+    flex-direction: column;
+}
+
+#rightProfile
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20rem;
+    border: 2px solid black;
+    padding: 2rem;
+    margin-top: 2rem;
+    background-color: rgba(0, 0, 0, 0.295);
+}
+
+.title
+{
+    display: inline-flex;
+    gap: 1rem;
+}
+
+.bio
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}`, "",{"version":3,"sources":["webpack://./frontend/public/assets/css/onPages.css"],"names":[],"mappings":"AAAA;;IAEI,aAAa;IACb,mBAAmB;IACnB,8BAA8B;AAClC;;AAEA,sBAAsB;AACtB,aAAa;AACb;;IAEI,aAAa;IACb,sBAAsB;IACtB,gBAAgB;IAChB,kBAAkB;IAClB,6BAA6B;IAC7B,sCAAsC;IACtC,kBAAkB;IAClB,mBAAmB;IACnB,oBAAoB;IACpB;;;;kCAI8B;AAClC;;AAEA;;IAEI,aAAa;IACb,sBAAsB;IACtB,iBAAiB;IACjB,sCAAsC;IACtC,eAAe;AACnB;;AAEA;;IAEI,YAAY;IACZ,aAAa;AACjB;;AAEA;;IAEI,eAAe;AACnB;;AAEA,gBAAgB;AAChB;;IAEI,YAAY;AAChB;;AAEA;;IAEI,aAAa;IACb,mBAAmB;IACnB,SAAS;AACb;;;AAGA;;IAEI,aAAa;IACb,sBAAsB;IACtB,mBAAmB;IACnB,sCAAsC;IACtC,kBAAkB;IAClB,mBAAmB;IACnB,oBAAoB;IACpB;;;;8CAI0C;AAC9C;;AAEA;;IAEI,YAAY;IACZ,sCAAsC;IACtC,eAAe;AACnB;;AAEA;;IAEI,aAAa;IACb,sBAAsB;IACtB,eAAe;AACnB;;AAEA;;IAEI,gBAAgB;AACpB;;AAEA;;IAEI,gCAAgC;IAChC,gCAAgC;AACpC;;;AAGA,YAAY;AACZ;;IAEI,aAAa;IACb,mBAAmB;IACnB,8BAA8B;AAClC;;AAEA;;IAEI,aAAa;AACjB;;AAEA;;IAEI,aAAa;IACb,sBAAsB;IACtB,aAAa;IACb,8BAA8B;AAClC;;AAEA;;IAEI,MAAM;AACV;;AAEA,eAAe;AACf;;IAEI,aAAa;IACb,mBAAmB;IACnB,iBAAiB;AACrB;;AAEA;;IAEI,aAAa;IACb,sBAAsB;IACtB,YAAY;IACZ,uBAAuB;IACvB,mBAAmB;IACnB,aAAa;IACb,gBAAgB;IAChB,sCAAsC;AAC1C;;AAEA;;IAEI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;;IAEI,aAAa;IACb,sBAAsB;IACtB,mBAAmB;IACnB,YAAY;IACZ,uBAAuB;IACvB,aAAa;IACb,gBAAgB;IAChB,sCAAsC;AAC1C;;AAEA;;IAEI,oBAAoB;IACpB,SAAS;AACb;;AAEA;;IAEI,aAAa;IACb,sBAAsB;IACtB,mBAAmB;AACvB","sourcesContent":["#onPages\n{\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n/*-----Playlist----- */\n/* SongList */\n#songsList\n{\n    display: flex;\n    flex-direction: column;\n    max-width: 20rem;\n    text-align: center;\n    justify-content: space-around;\n    background-color: rgba(0, 0, 0, 0.212);\n    padding-left: 1rem;\n    padding-right: 1rem;\n    padding-bottom: 1rem;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),\n    0 4px 8px rgba(0, 0, 0, 0.1),\n    0 8px 16px rgba(0, 0, 0, 0.1),\n    0 16px 32px rgba(0, 0, 0, 0.1),\n    0 32px 64px rgba(0, 0, 0, 0.1);\n}\n\n#songs\n{\n    display: flex;\n    flex-direction: column;\n    text-align: start;\n    background-color: rgba(0, 0, 0, 0.349);\n    padding: 0.5rem;\n}\n\n#songs p\n{\n    margin: 0rem;\n    padding: 0rem;\n}\n\n#song\n{\n    padding: 0.5rem;\n}\n\n/* GetPlaylist */\n#Playlist\n{\n    width: 30rem;\n}\n\n#topOfPlay\n{\n    display: flex;\n    align-items: center;\n    gap: 2rem;\n}\n\n\n#bottomOfPlay\n{\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    background-color: rgba(0, 0, 0, 0.212);\n    padding-left: 1rem;\n    padding-right: 1rem;\n    padding-bottom: 1rem;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),\n                0 4px 8px rgba(0, 0, 0, 0.1),\n                0 8px 16px rgba(0, 0, 0, 0.1),\n                0 16px 32px rgba(0, 0, 0, 0.1),\n                0 32px 64px rgba(0, 0, 0, 0.1);\n}\n\n#comments\n{\n    width: 27rem;\n    background-color: rgba(0, 0, 0, 0.349);\n    padding: 0.5rem;\n}\n\n#comment\n{\n    display: flex;\n    flex-direction: column;\n    padding: 0.5rem;\n}\n\n#comment p\n{\n    margin: 0.2rem 0;\n}\n\n#content\n{\n    background-color: rgb(0, 17, 15);\n    padding: 0.5rem 1rem 1rem 0.5rem;\n}\n\n\n/* Profile */\n#Profile\n{\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n#Profile img\n{\n    height: 10rem;\n}\n\n#profileLogo\n{\n    display: flex;\n    flex-direction: column;\n    height: 27rem;\n    justify-content: space-between;\n}\n\n#profileLogo profileLogo\n{\n    top: 0;\n}\n\n/* GetProfile */\n#getProfile\n{\n    display: flex;\n    flex-direction: row;\n    column-gap: 12rem;\n}\n\n#leftProfile\n{\n    display: flex;\n    flex-direction: column;\n    width: 20rem;\n    border: 2px solid black;\n    align-items: center;\n    padding: 2rem;\n    margin-top: 2rem;\n    background-color: rgba(0, 0, 0, 0.295);\n}\n\n#titles\n{\n    display: flex;\n    flex-direction: column;\n}\n\n#rightProfile\n{\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    width: 20rem;\n    border: 2px solid black;\n    padding: 2rem;\n    margin-top: 2rem;\n    background-color: rgba(0, 0, 0, 0.295);\n}\n\n.title\n{\n    display: inline-flex;\n    gap: 1rem;\n}\n\n.bio\n{\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6205,6 +6448,20 @@ module.exports = function (item) {
   }
   return [content].join("\n");
 };
+
+/***/ }),
+
+/***/ "./frontend/public/assets/images/logo.png":
+/*!************************************************!*\
+  !*** ./frontend/public/assets/images/logo.png ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("assets/images/frontend/public/assets/images/logo.png");
 
 /***/ }),
 

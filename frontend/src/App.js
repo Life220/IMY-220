@@ -18,7 +18,7 @@ class App extends React.Component
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
             <Route path="/playlist" element={<Playlist />} />
-            <Route path="/Profile" element={<Playlist />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </Router>
         <footer>
