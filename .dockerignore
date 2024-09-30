@@ -1,0 +1,4 @@
+node_modules
+*.pdf
+frontend/public/assets/images/*.xcf
+credentials
