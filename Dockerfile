@@ -1,4 +1,4 @@
-FROM node:18
+FROM node
 
 # Set environment variables
 ENV PORT=3000
@@ -10,7 +10,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm i
 
 # Copy the rest of the application code
 COPY . .
