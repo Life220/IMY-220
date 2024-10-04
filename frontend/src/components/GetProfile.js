@@ -1,9 +1,11 @@
 import React from "react";
+import { getProfile } from "../../../backend/api";
 
 class GetProfile extends React.Component {
     constructor(props)
     {
         super(props);
+        getProfile(username);
         this.state = {
             username: this.props.profile.username,
             fullName: this.props.profile.fullName

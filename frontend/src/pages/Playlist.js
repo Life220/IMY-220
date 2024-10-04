@@ -1,8 +1,8 @@
 import React from "react";
 import "../../public/assets/css/onPages.css";
 import Navigation from "../components/Navigation";
-import SongList from "../components/songsList";
-import GetPlaylist from "../components/getPlaylist";
+import SongList from "../components/SongsList";
+import GetPlaylist from "../components/GetPlaylist";
 
 class Playlist extends React.Component
 {

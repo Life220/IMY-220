@@ -1,5 +1,7 @@
 const express = require("express");
 const path = require("path");
+const bcrypt = require("bcrypt");
+const multer = require("multer");
 const { MongoClient } = require("mongodb");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,15 +25,71 @@ MongoClient.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology
 
 // API
 
+// Login endpoint
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try
+  {
+    const user = await db.collection("user").findOne({ username: username });
+    if (user && await bcrypt.compare(password, user.password))
+    {
+      res.json({ message: "Login successful" });
+    }
+    else
+    {
+      res.json({ message: "Invalid username or password" });
+    }
+  }
+  catch (error)
+  {
+    res.status(500).send(error);
+  }
+});
+
+// Register endpoint
+app.post("/api/register", async (req, res) => {
+  const { username, password, bio, email } = req.body;
+  const image = req.file;
+
+  try
+  {
+    const encryptedPass = await bcrypt.hash(password, 10);
+
+    const newUser = {
+      username,
+      password: encryptedPass,
+      bio,
+      image: image ? image : "",
+      email: email,
+      joined: new Date(),
+      achievements: [],
+      followers: [],
+      following: [],
+      "liked-playlists": [],
+      "liked-songs": []
+    };
+
+    await db.collection("user").insertOne(newUser);
+
+    res.json({ message: "Registration successful" });
+  }
+  catch (error)
+  {
+    res.status(500).send(error);
+  }
+});
+
 // Get user details
 app.get("/api/user/:username", (req, res) => {
   const username = req.params.username;
+
   db.collection("user").findOne({ username: username })
     .then(user => {
       if (user) {
         res.json(user);
       } else {
-        res.status(404).send("Profile not found for: " + username);
+        res.json("Profile not found for: " + username);
       }
     })
     .catch(error => res.status(500).send(error));

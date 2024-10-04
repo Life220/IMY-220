@@ -39,7 +39,7 @@ class Navigation extends React.Component
                         <h1>RecordShare</h1>
                         <nav>
                             <Link to="/">Home</Link>
-                            <Link to="/login">Login</Link>
+                            <Link to="/login">Login/Register</Link>
                             <Link to="/profile">Profile</Link>
                         </nav>
                     </div>)
