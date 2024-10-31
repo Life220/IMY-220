@@ -22,12 +22,14 @@ class Register extends React.Component
     this.setState({ [name]: value });
   };
 
-  handleLogin = async () => {
+  handleRegister = async () => {
     const { username, password, image, bio, email } = this.state;
+    console.log("Get prof")
     const response = await getProfile(username);
     
-    if (response.data == "Profile not found for: " + username)
+    if (response === false)
     {
+      console.log("Start reg")
         const registered = await register(username, password, image, bio, email);
         if (registered)
         {
@@ -42,6 +44,8 @@ class Register extends React.Component
     }
     else
     {
+      console.log("DID NOT Start reg")
+
         alert("Username already in use");
     }
   };
@@ -60,14 +64,14 @@ class Register extends React.Component
                 onChange={this.handleImageChange}
                 />
             <h3>Email</h3>
-            <input type="email" name="email" value={email} onChange={this.handleInputChange} placeholder="john.wick@recordshare.com"></input>
+            <input className="text-black" type="email" name="email" value={email} onChange={this.handleInputChange} placeholder="john.wick@recordshare.com"></input>
             <h3>Username</h3>
-            <input type="text" name="username" value={username} onChange={this.handleInputChange} placeholder="John1234"></input>
+            <input className="text-black" type="text" name="username" value={username} onChange={this.handleInputChange} placeholder="John1234"></input>
             <p>Password</p>
-            <input type="password" name="password" value={password} onChange={this.handleInputChange} placeholder="********"></input>
+            <input className="text-black" type="password" name="password" value={password} onChange={this.handleInputChange} placeholder="********"></input>
             <p>Bio</p>
-            <textarea type="text" name="bio" value={password} onChange={this.handleInputChange} placeholder="Boogie man"></textarea>
-            <button className="mt-2" onClick={this.handleLogin}>Register</button>
+            <textarea className="text-black" type="text" name="bio" value={bio} onChange={this.handleInputChange} placeholder="Boogie man"></textarea>
+            <button className="mt-2" onClick={this.handleRegister}>Register</button>
         </div>
     );
   }

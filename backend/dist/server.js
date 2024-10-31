@@ -107,7 +107,7 @@ app.post("/api/register", /*#__PURE__*/function () {
             username: username,
             password: encryptedPass,
             bio: bio,
-            image: image ? image : "",
+            image: image ? image.path : "",
             email: email,
             joined: new Date(),
             achievements: [],
@@ -148,7 +148,7 @@ app.get("/api/user/:username", function (req, res) {
     if (user) {
       res.json(user);
     } else {
-      res.json("Profile not found for: " + username);
+      res.json(false);
     }
   })["catch"](function (error) {
     return res.status(500).send(error);

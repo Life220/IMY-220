@@ -60,7 +60,7 @@ app.post("/api/register", async (req, res) => {
       username,
       password: encryptedPass,
       bio,
-      image: image ? image : "",
+      image: image ? image.path : "",
       email: email,
       joined: new Date(),
       achievements: [],
@@ -86,10 +86,13 @@ app.get("/api/user/:username", (req, res) => {
 
   db.collection("user").findOne({ username: username })
     .then(user => {
-      if (user) {
+      if (user)
+      {
         res.json(user);
-      } else {
-        res.json("Profile not found for: " + username);
+      }
+      else
+      {
+        res.json(false);
       }
     })
     .catch(error => res.status(500).send(error));

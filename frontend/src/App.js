@@ -23,7 +23,7 @@ class App extends React.Component
           </Routes>
         </Router>
         <footer>
-          Pause/Play
+          Username
         </footer>
       </div>
     );

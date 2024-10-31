@@ -43,7 +43,7 @@ export async function register(username, password, image, bio, email)
         formData.append("bio", bio);
         formData.append("email", email);
         if (image) {
-            formData.append("image", image);
+            formData.append("image", image, image.name);
         }
 
         const response = await fetch("http://localhost:3000/api/register", {
@@ -71,7 +71,6 @@ export async function register(username, password, image, bio, email)
     {
         console.error("There was a problem with the registration: ", error);
         return { error: "Failed to register: " + error.message };
-        return false;
     }
 }
 
@@ -84,11 +83,14 @@ export async function getProfile(username)
         if (!response.ok)
         {
             const errorData = await response.json();
+            if (errorData === false)
+                return false;
             throw new Error(errorData.message || "Network response was not ok");
         }
             
-        const data = await response.json();
-        return { data }; // Return a promise
+        // const data = await response.json();
+        // return { data }; // Return a promise
+        return false;
     }
     catch (error)
     {

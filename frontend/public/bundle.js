@@ -5170,7 +5170,7 @@ function _register() {
           formData.append("bio", bio);
           formData.append("email", email);
           if (image) {
-            formData.append("image", image);
+            formData.append("image", image, image.name);
           }
           _context2.next = 9;
           return fetch("http://localhost:3000/api/register", {
@@ -5201,7 +5201,7 @@ function _register() {
         case 22:
           return _context2.abrupt("return", false);
         case 23:
-          _context2.next = 30;
+          _context2.next = 29;
           break;
         case 25:
           _context2.prev = 25;
@@ -5210,7 +5210,7 @@ function _register() {
           return _context2.abrupt("return", {
             error: "Failed to register: " + _context2.t0.message
           });
-        case 30:
+        case 29:
         case "end":
           return _context2.stop();
       }
@@ -5223,7 +5223,7 @@ function getProfile(_x8) {
 }
 function _getProfile() {
   _getProfile = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(username) {
-    var response, errorData, data;
+    var response, errorData;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
@@ -5233,34 +5233,34 @@ function _getProfile() {
         case 3:
           response = _context3.sent;
           if (response.ok) {
-            _context3.next = 9;
+            _context3.next = 11;
             break;
           }
           _context3.next = 7;
           return response.json();
         case 7:
           errorData = _context3.sent;
+          if (!(errorData === false)) {
+            _context3.next = 10;
+            break;
+          }
+          return _context3.abrupt("return", false);
+        case 10:
           throw new Error(errorData.message || "Network response was not ok");
-        case 9:
-          _context3.next = 11;
-          return response.json();
         case 11:
-          data = _context3.sent;
-          return _context3.abrupt("return", {
-            data: data
-          });
-        case 15:
-          _context3.prev = 15;
+          return _context3.abrupt("return", false);
+        case 14:
+          _context3.prev = 14;
           _context3.t0 = _context3["catch"](0);
           console.error("There was a problem with fetching the profile for: " + username + ": ", _context3.t0);
           return _context3.abrupt("return", {
             error: "Failed to get the profile for: " + username
           });
-        case 19:
+        case 18:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[0, 15]]);
+    }, _callee3, null, [[0, 14]]);
   }));
   return _getProfile.apply(this, arguments);
 }
@@ -5330,7 +5330,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/profile",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_5__["default"], null)
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("footer", null, "Pause/Play"));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("footer", null, "Username"));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
@@ -5667,23 +5667,25 @@ var Register = /*#__PURE__*/function (_React$Component) {
         value = _event$target.value;
       _this.setState(_defineProperty({}, name, value));
     });
-    _defineProperty(_this, "handleLogin", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    _defineProperty(_this, "handleRegister", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _this$state, username, password, image, bio, email, response, registered;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _this$state = _this.state, username = _this$state.username, password = _this$state.password, image = _this$state.image, bio = _this$state.bio, email = _this$state.email;
-            _context.next = 3;
+            console.log("Get prof");
+            _context.next = 4;
             return (0,_backend_api__WEBPACK_IMPORTED_MODULE_2__.getProfile)(username);
-          case 3:
+          case 4:
             response = _context.sent;
-            if (!(response.data == "Profile not found for: " + username)) {
-              _context.next = 11;
+            if (!(response === false)) {
+              _context.next = 13;
               break;
             }
-            _context.next = 7;
+            console.log("Start reg");
+            _context.next = 9;
             return (0,_backend_api__WEBPACK_IMPORTED_MODULE_2__.register)(username, password, image, bio, email);
-          case 7:
+          case 9:
             registered = _context.sent;
             if (registered) {
               alert("Registered succesfully, welcome " + username);
@@ -5692,11 +5694,12 @@ var Register = /*#__PURE__*/function (_React$Component) {
             } else {
               alert("An error occured when registering");
             }
-            _context.next = 12;
+            _context.next = 15;
             break;
-          case 11:
+          case 13:
+            console.log("DID NOT Start reg");
             alert("Username already in use");
-          case 12:
+          case 15:
           case "end":
             return _context.stop();
         }
@@ -5728,32 +5731,36 @@ var Register = /*#__PURE__*/function (_React$Component) {
         accept: "image/*",
         onChange: this.handleImageChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        className: "text-black",
         type: "email",
         name: "email",
         value: email,
         onChange: this.handleInputChange,
         placeholder: "john.wick@recordshare.com"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        className: "text-black",
         type: "text",
         name: "username",
         value: username,
         onChange: this.handleInputChange,
         placeholder: "John1234"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Password"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        className: "text-black",
         type: "password",
         name: "password",
         value: password,
         onChange: this.handleInputChange,
         placeholder: "********"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Bio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
+        className: "text-black",
         type: "text",
         name: "bio",
-        value: password,
+        value: bio,
         onChange: this.handleInputChange,
         placeholder: "Boogie man"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "mt-2",
-        onClick: this.handleLogin
+        onClick: this.handleRegister
       }, "Register"));
     }
   }]);
@@ -6161,16 +6168,20 @@ var Login = /*#__PURE__*/function (_React$Component) {
         password = _this$state2.password,
         register = _this$state2.register;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex flex-col items-center mt-2"
+        className: "flex justify-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex flex-col items-center mt-2 p-10 greetBack w-80"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "RecordShare"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "flex flex-col w-52 m-2 gap-1"
       }, !register ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        className: "text-black",
         type: "text",
         name: "username",
         value: username,
         onChange: this.handleInputChange,
         placeholder: "John1234"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Password"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        className: "text-black",
         type: "password",
         name: "password",
         value: password,
@@ -6185,7 +6196,7 @@ var Login = /*#__PURE__*/function (_React$Component) {
       }, "Register")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Register__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "mt-4",
         onClick: this.handleRegister
-      }, "Login")))));
+      }, "Login"))))));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
@@ -6320,10 +6331,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _public_assets_css_onPages_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../public/assets/css/onPages.css */ "./frontend/public/assets/css/onPages.css");
 /* harmony import */ var _public_assets_images_logo_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../public/assets/images/logo.png */ "./frontend/public/assets/images/logo.png");
-/* harmony import */ var _public_assets_images_Rick_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../public/assets/images/Rick.png */ "./frontend/public/assets/images/Rick.png");
-/* harmony import */ var _public_assets_images_popular_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../public/assets/images/popular.png */ "./frontend/public/assets/images/popular.png");
-/* harmony import */ var _components_Navigation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Navigation */ "./frontend/src/components/Navigation.js");
-/* harmony import */ var _components_GetProfile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/GetProfile */ "./frontend/src/components/GetProfile.js");
+/* harmony import */ var _components_Navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Navigation */ "./frontend/src/components/Navigation.js");
+/* harmony import */ var _components_GetProfile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/GetProfile */ "./frontend/src/components/GetProfile.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -6342,36 +6351,6 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 
 
 
-
-
-
-// const profile = {
-//     username: "Ricky117",
-//     fullName: "Rick Astley",
-//     bio: "Never gonna give you up",
-//     achievements: [
-//         { rank: "2", achievements: "Highest Rated Playlist" },
-//         { rank: "7", achievements: "Most Followed" }
-//     ],
-//     followers: {
-//         username: "JackySparrow"
-//     },
-//     following: {
-//         username: "JackySparrow"
-//     },
-//     playlists: [
-//         { rank: 1, name: "Gave You Up", image:popularPic, songs:[
-//             { rank: 1, title: "Never Gonna Give You Up", artist: "Rick Astley" },
-//             { rank: 2, title: "Blinding Lights", artist: "Justin Bieber" },
-//             { rank: 3, title: "Never Really Over", artist: "Katy Perry" },
-//         ]},
-//         { rank: 2, name: "RapCaviar", image: "path/to/rap_caviar.jpg" },
-//         { rank: 3, name: "Today's Top Hits", image: "path/to/todays_top_hits.jpg" },
-//         { rank: 4, name: "Rock Classics", image: "path/to/rock_classics.jpg" },
-//         { rank: 5, name: "Chill Hits", image: "path/to/chill_hits.jpg" }
-//     ],
-//     image: profilePic
-// };
 var Profile = /*#__PURE__*/function (_React$Component) {
   function Profile() {
     _classCallCheck(this, Profile);
@@ -6385,12 +6364,12 @@ var Profile = /*#__PURE__*/function (_React$Component) {
         id: "Profile"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         id: "profileLogo"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: _public_assets_images_logo_png__WEBPACK_IMPORTED_MODULE_2__["default"],
         alt: "logo"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         alt: "Back"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_GetProfile__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_GetProfile__WEBPACK_IMPORTED_MODULE_4__["default"], {
         username: username
       }));
     }
@@ -6537,7 +6516,13 @@ footer
 #searchButton input
 {
     height: 1.2rem;
-}`, "",{"version":3,"sources":["webpack://./frontend/public/assets/css/main.css"],"names":[],"mappings":"AAAA,SAAS;AACT;;IAEI,YAAY;IACZ,SAAS;IACT,YAAY;IACZ,wDAAwD;AAC5D;;AAEA;;IAEI,gCAAgC;AACpC;;AAEA;;IAEI,YAAY;IACZ,uBAAuB;IACvB,6BAA6B;IAC7B,eAAe;IACf,kBAAkB;IAClB,SAAS;IACT,OAAO;IACP,WAAW;IACX,aAAa;IACb,YAAY;AAChB;;AAEA;;IAEI,kBAAkB;IAClB,mBAAmB;IACnB,oBAAoB;AACxB;;AAEA,eAAe;AACf;;IAEI,aAAa;IACb,sBAAsB;IACtB,eAAe;IACf,kBAAkB;IAClB,oGAAoG;IACpG,+BAA+B;IAC/B,MAAM;IACN,OAAO;IACP,YAAY;IACZ,kBAAkB;IAClB,mBAAmB;IACnB,aAAa;AACjB;;AAEA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,aAAa;IACb,sBAAsB;IACtB,aAAa;IACb,yBAAyB;AAC7B;;AAEA;;IAEI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;;IAEI,eAAe;AACnB;;AAEA;;IAEI,aAAa;IACb,mBAAmB;AACvB;;AAEA;;IAEI,aAAa;IACb,mBAAmB;IACnB,kBAAkB;AACtB;;AAEA;;IAEI,iBAAiB;AACrB;;AAEA;;IAEI,aAAa;IACb,mBAAmB;IACnB,4BAA4B;AAChC;;AAEA,aAAa;;AAEb,SAAS;AACT;;IAEI,aAAa;IACb,mBAAmB;IACnB,uBAAkB;SAAlB,kBAAkB;IAClB,eAAe;IACf,mBAAmB;IACnB,MAAM;IACN,WAAW;AACf;;AAEA;;IAEI,cAAc;AAClB","sourcesContent":["/* Main */\nbody, html\n{\n    color: white;\n    margin: 0;\n    height: 105%;\n    background: linear-gradient(to bottom, #004b41, #002b21);\n}\n\nheader\n{\n    border-bottom: 2px solid #002b33;\n}\n\nfooter\n{\n    color: white;\n    background-color: black;\n    border-top: 2px solid #004b41;\n    position: fixed;\n    text-align: center;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    padding: 1rem;\n    z-index: 999;\n}\n\n#Main\n{\n    padding-left: 2rem;\n    padding-right: 2rem;\n    padding-bottom: 4rem;\n}\n\n/* Components */\n#Navigation\n{\n    display: flex;\n    flex-direction: column;\n    position: fixed;\n    text-align: center;\n    background: linear-gradient(to left, #002b21, #002b33), linear-gradient(to bottom, #004b41, #002b21);\n    border-right: 2px solid #004b41;\n    top: 0;\n    left: 0;\n    height: 100%;\n    padding-left: 2rem;\n    padding-right: 2rem;\n    z-index: 1000;\n}\n\n#Navigation h1\n{\n    padding-bottom: 5rem;\n}\n#Navigation nav\n{\n    display: flex;\n    flex-direction: column;\n    row-gap: 2rem;\n    justify-content: baseline;\n}\n\n#NavTab > button\n{\n    background: none;\n    border: none;\n}\n\n#NavTab > button:hover\n{\n    cursor: pointer;\n}\n\n#Carousel\n{\n    display: flex;\n    flex-direction: row;\n}\n\n#Tops\n{\n    display: flex;\n    flex-direction: row;\n    margin-right: 3rem;\n}\n\n#Tops p\n{\n    margin-right: 5px;\n}\n\n.inline\n{\n    display: flex;\n    flex-direction: row;\n    align-content: space-between;\n}\n\n/* Elements */\n\n/* main */\n#searchButton\n{\n    display: flex;\n    flex-direction: row;\n    column-gap: 0.5rem;\n    position: fixed;\n    align-items: center;\n    top: 0;\n    right: 5rem;\n}\n\n#searchButton input\n{\n    height: 1.2rem;\n}"],"sourceRoot":""}]);
+}
+
+.greetBack
+{
+    background-color: rgba(0, 0, 0, 0.432);
+    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2);
+}`, "",{"version":3,"sources":["webpack://./frontend/public/assets/css/main.css"],"names":[],"mappings":"AAAA,SAAS;AACT;;IAEI,YAAY;IACZ,SAAS;IACT,YAAY;IACZ,wDAAwD;AAC5D;;AAEA;;IAEI,gCAAgC;AACpC;;AAEA;;IAEI,YAAY;IACZ,uBAAuB;IACvB,6BAA6B;IAC7B,eAAe;IACf,kBAAkB;IAClB,SAAS;IACT,OAAO;IACP,WAAW;IACX,aAAa;IACb,YAAY;AAChB;;AAEA;;IAEI,kBAAkB;IAClB,mBAAmB;IACnB,oBAAoB;AACxB;;AAEA,eAAe;AACf;;IAEI,aAAa;IACb,sBAAsB;IACtB,eAAe;IACf,kBAAkB;IAClB,oGAAoG;IACpG,+BAA+B;IAC/B,MAAM;IACN,OAAO;IACP,YAAY;IACZ,kBAAkB;IAClB,mBAAmB;IACnB,aAAa;AACjB;;AAEA;;IAEI,oBAAoB;AACxB;AACA;;IAEI,aAAa;IACb,sBAAsB;IACtB,aAAa;IACb,yBAAyB;AAC7B;;AAEA;;IAEI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;;IAEI,eAAe;AACnB;;AAEA;;IAEI,aAAa;IACb,mBAAmB;AACvB;;AAEA;;IAEI,aAAa;IACb,mBAAmB;IACnB,kBAAkB;AACtB;;AAEA;;IAEI,iBAAiB;AACrB;;AAEA;;IAEI,aAAa;IACb,mBAAmB;IACnB,4BAA4B;AAChC;;AAEA,aAAa;;AAEb,SAAS;AACT;;IAEI,aAAa;IACb,mBAAmB;IACnB,uBAAkB;SAAlB,kBAAkB;IAClB,eAAe;IACf,mBAAmB;IACnB,MAAM;IACN,WAAW;AACf;;AAEA;;IAEI,cAAc;AAClB;;AAEA;;IAEI,sCAAsC;IACtC,4CAA4C;AAChD","sourcesContent":["/* Main */\nbody, html\n{\n    color: white;\n    margin: 0;\n    height: 105%;\n    background: linear-gradient(to bottom, #004b41, #002b21);\n}\n\nheader\n{\n    border-bottom: 2px solid #002b33;\n}\n\nfooter\n{\n    color: white;\n    background-color: black;\n    border-top: 2px solid #004b41;\n    position: fixed;\n    text-align: center;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    padding: 1rem;\n    z-index: 999;\n}\n\n#Main\n{\n    padding-left: 2rem;\n    padding-right: 2rem;\n    padding-bottom: 4rem;\n}\n\n/* Components */\n#Navigation\n{\n    display: flex;\n    flex-direction: column;\n    position: fixed;\n    text-align: center;\n    background: linear-gradient(to left, #002b21, #002b33), linear-gradient(to bottom, #004b41, #002b21);\n    border-right: 2px solid #004b41;\n    top: 0;\n    left: 0;\n    height: 100%;\n    padding-left: 2rem;\n    padding-right: 2rem;\n    z-index: 1000;\n}\n\n#Navigation h1\n{\n    padding-bottom: 5rem;\n}\n#Navigation nav\n{\n    display: flex;\n    flex-direction: column;\n    row-gap: 2rem;\n    justify-content: baseline;\n}\n\n#NavTab > button\n{\n    background: none;\n    border: none;\n}\n\n#NavTab > button:hover\n{\n    cursor: pointer;\n}\n\n#Carousel\n{\n    display: flex;\n    flex-direction: row;\n}\n\n#Tops\n{\n    display: flex;\n    flex-direction: row;\n    margin-right: 3rem;\n}\n\n#Tops p\n{\n    margin-right: 5px;\n}\n\n.inline\n{\n    display: flex;\n    flex-direction: row;\n    align-content: space-between;\n}\n\n/* Elements */\n\n/* main */\n#searchButton\n{\n    display: flex;\n    flex-direction: row;\n    column-gap: 0.5rem;\n    position: fixed;\n    align-items: center;\n    top: 0;\n    right: 5rem;\n}\n\n#searchButton input\n{\n    height: 1.2rem;\n}\n\n.greetBack\n{\n    background-color: rgba(0, 0, 0, 0.432);\n    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2);\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7287,21 +7272,37 @@ video {
 .w-52 {
   width: 13rem;
 }
+.w-72 {
+  width: 18rem;
+}
+.w-80 {
+  width: 20rem;
+}
 .flex-col {
   flex-direction: column;
 }
 .items-center {
   align-items: center;
 }
+.justify-center {
+  justify-content: center;
+}
 .gap-1 {
   gap: 0.25rem;
+}
+.p-10 {
+  padding: 2.5rem;
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 
 h1
 {
     font-size: 35px;
-}`, "",{"version":3,"sources":["webpack://./frontend/public/assets/css/tailwind.css"],"names":[],"mappings":"AAAA;EAAA,wBAAc;EAAd,wBAAc;EAAd,mBAAc;EAAd,mBAAc;EAAd,cAAc;EAAd,cAAc;EAAd,cAAc;EAAd,eAAc;EAAd,eAAc;EAAd,aAAc;EAAd,aAAc;EAAd,kBAAc;EAAd,sCAAc;EAAd,8BAAc;EAAd,6BAAc;EAAd,4BAAc;EAAd,eAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,kBAAc;EAAd,2BAAc;EAAd,4BAAc;EAAd,sCAAc;EAAd,kCAAc;EAAd,2BAAc;EAAd,sBAAc;EAAd,8BAAc;EAAd,YAAc;EAAd,kBAAc;EAAd,gBAAc;EAAd,iBAAc;EAAd,kBAAc;EAAd,cAAc;EAAd,gBAAc;EAAd,aAAc;EAAd,mBAAc;EAAd,qBAAc;EAAd,2BAAc;EAAd,yBAAc;EAAd,0BAAc;EAAd,2BAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,yBAAc;EAAd,sBAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,qBAAc;EAAd;AAAc;;AAAd;EAAA,wBAAc;EAAd,wBAAc;EAAd,mBAAc;EAAd,mBAAc;EAAd,cAAc;EAAd,cAAc;EAAd,cAAc;EAAd,eAAc;EAAd,eAAc;EAAd,aAAc;EAAd,aAAc;EAAd,kBAAc;EAAd,sCAAc;EAAd,8BAAc;EAAd,6BAAc;EAAd,4BAAc;EAAd,eAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,kBAAc;EAAd,2BAAc;EAAd,4BAAc;EAAd,sCAAc;EAAd,kCAAc;EAAd,2BAAc;EAAd,sBAAc;EAAd,8BAAc;EAAd,YAAc;EAAd,kBAAc;EAAd,gBAAc;EAAd,iBAAc;EAAd,kBAAc;EAAd,cAAc;EAAd,gBAAc;EAAd,aAAc;EAAd,mBAAc;EAAd,qBAAc;EAAd,2BAAc;EAAd,yBAAc;EAAd,0BAAc;EAAd,2BAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,yBAAc;EAAd,sBAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,qBAAc;EAAd;AAAc,CAAd;;CAAc,CAAd;;;CAAc;;AAAd;;;EAAA,sBAAc,EAAd,MAAc;EAAd,eAAc,EAAd,MAAc;EAAd,mBAAc,EAAd,MAAc;EAAd,qBAAc,EAAd,MAAc;AAAA;;AAAd;;EAAA,gBAAc;AAAA;;AAAd;;;;;;;;CAAc;;AAAd;;EAAA,gBAAc,EAAd,MAAc;EAAd,8BAAc,EAAd,MAAc;EAAd,gBAAc,EAAd,MAAc;EAAd,cAAc;KAAd,WAAc,EAAd,MAAc;EAAd,+HAAc,EAAd,MAAc;EAAd,6BAAc,EAAd,MAAc;EAAd,+BAAc,EAAd,MAAc;EAAd,wCAAc,EAAd,MAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,SAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;AAAA;;AAAd;;;;CAAc;;AAAd;EAAA,SAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;EAAd,qBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,yCAAc;UAAd,iCAAc;AAAA;;AAAd;;CAAc;;AAAd;;;;;;EAAA,kBAAc;EAAd,oBAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,cAAc;EAAd,wBAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,mBAAc;AAAA;;AAAd;;;;;CAAc;;AAAd;;;;EAAA,+GAAc,EAAd,MAAc;EAAd,6BAAc,EAAd,MAAc;EAAd,+BAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,cAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,cAAc;EAAd,cAAc;EAAd,kBAAc;EAAd,wBAAc;AAAA;;AAAd;EAAA,eAAc;AAAA;;AAAd;EAAA,WAAc;AAAA;;AAAd;;;;CAAc;;AAAd;EAAA,cAAc,EAAd,MAAc;EAAd,qBAAc,EAAd,MAAc;EAAd,yBAAc,EAAd,MAAc;AAAA;;AAAd;;;;CAAc;;AAAd;;;;;EAAA,oBAAc,EAAd,MAAc;EAAd,8BAAc,EAAd,MAAc;EAAd,gCAAc,EAAd,MAAc;EAAd,eAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;EAAd,uBAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;EAAd,SAAc,EAAd,MAAc;EAAd,UAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,oBAAc;AAAA;;AAAd;;;CAAc;;AAAd;;;;EAAA,0BAAc,EAAd,MAAc;EAAd,6BAAc,EAAd,MAAc;EAAd,sBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,aAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,gBAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,wBAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,YAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,6BAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,wBAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,0BAAc,EAAd,MAAc;EAAd,aAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,kBAAc;AAAA;;AAAd;;CAAc;;AAAd;;;;;;;;;;;;;EAAA,SAAc;AAAA;;AAAd;EAAA,SAAc;EAAd,UAAc;AAAA;;AAAd;EAAA,UAAc;AAAA;;AAAd;;;EAAA,gBAAc;EAAd,SAAc;EAAd,UAAc;AAAA;;AAAd;;CAAc;AAAd;EAAA,UAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,gBAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,UAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;AAAA;;AAAd;;EAAA,UAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,eAAc;AAAA;;AAAd;;CAAc;AAAd;EAAA,eAAc;AAAA;;AAAd;;;;CAAc;;AAAd;;;;;;;;EAAA,cAAc,EAAd,MAAc;EAAd,sBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,eAAc;EAAd,YAAc;AAAA;;AAAd,wEAAc;AAAd;EAAA,aAAc;AAAA;AAEd;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;;;AAGnB;;IAEI,eAAe;AACnB","sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n\nh1\n{\n    font-size: 35px;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./frontend/public/assets/css/tailwind.css"],"names":[],"mappings":"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","sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n\nh1\n{\n    font-size: 35px;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7550,20 +7551,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("assets/images/frontend/public/assets/images/pop.png");
-
-/***/ }),
-
-/***/ "./frontend/public/assets/images/popular.png":
-/*!***************************************************!*\
-  !*** ./frontend/public/assets/images/popular.png ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("assets/images/frontend/public/assets/images/popular.png");
 
 /***/ }),
 

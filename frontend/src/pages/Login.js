@@ -50,27 +50,29 @@ class Login extends React.Component
           <Navigation />
         </header>
         
-        <div className="flex flex-col items-center mt-2">
-          <h1>RecordShare</h1>
-          <div className="flex flex-col w-52 m-2 gap-1">
-            {!register ?
-            (
-              <>
-              <h3>Username</h3>
-              <input type="text" name="username" value={username} onChange={this.handleInputChange} placeholder="John1234"></input>
-              <p>Password</p>
-              <input type="password" name="password" value={password} onChange={this.handleInputChange} placeholder="********"></input>
-              <button className="mt-2" onClick={this.handleLogin}>Login</button>
-              <button className="mt-4" onClick={this.handleRegister}>Register</button>
-              </>
-            )
-            :
-            (
-              <>
-              <Register />
-              <button className="mt-4" onClick={this.handleRegister}>Login</button>
-              </>
-            )}
+        <div className="flex justify-center">
+          <div className="flex flex-col items-center mt-2 p-10 greetBack w-80">
+            <h1>RecordShare</h1>
+            <div className="flex flex-col w-52 m-2 gap-1">
+              {!register ?
+              (
+                <>
+                <h3>Username</h3>
+                <input className="text-black" type="text" name="username" value={username} onChange={this.handleInputChange} placeholder="John1234"></input>
+                <p>Password</p>
+                <input className="text-black" type="password" name="password" value={password} onChange={this.handleInputChange} placeholder="********"></input>
+                <button className="mt-2" onClick={this.handleLogin}>Login</button>
+                <button className="mt-4" onClick={this.handleRegister}>Register</button>
+                </>
+              )
+              :
+              (
+                <>
+                <Register />
+                <button className="mt-4" onClick={this.handleRegister}>Login</button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
