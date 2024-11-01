@@ -7,7 +7,7 @@ class GetProfile extends React.Component {
         super(props);
         getProfile(username);
         this.state = {
-            username: this.props.profile.username,
+            username: localStorage.getItem("username"),
             fullName: this.props.profile.fullName
         };
         this.handleUsermameChange = this.handleUsermameChange.bind(this);

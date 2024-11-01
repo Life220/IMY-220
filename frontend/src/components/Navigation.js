@@ -27,6 +27,8 @@ class Navigation extends React.Component
 
     render()
     {
+        const username = localStorage.getItem("username");
+
         return (
             <div id="NavTab">
                 <button onClick={this.toggleNavigation}>
@@ -39,8 +41,19 @@ class Navigation extends React.Component
                         <h1>RecordShare</h1>
                         <nav>
                             <Link to="/">Home</Link>
-                            <Link to="/login">Login/Register</Link>
-                            <Link to="/profile">Profile</Link>
+                        </nav>
+                        <nav>
+                            {username ?
+                            (
+                                <button>Lougout</button>
+                            )
+                            :
+                            (
+                                <>
+                                    <Link to="/profile">Profile</Link>
+                                    <Link to="/login">Login/Register</Link>
+                                </>
+                            )}
                         </nav>
                     </div>)
                 }
