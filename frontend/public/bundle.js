@@ -5159,62 +5159,63 @@ function register(_x3, _x4, _x5, _x6, _x7) {
 }
 function _register() {
   _register = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(username, password, image, bio, email) {
-    var formData, response, _errorData2, data;
+    var inData, response, _errorData2, data;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
-          formData = new FormData();
-          formData.append("username", username);
-          formData.append("password", password);
-          formData.append("bio", bio);
-          formData.append("email", email);
-          if (image) {
-            formData.append("image", image, image.name);
-          }
-          _context2.next = 9;
+          inData = {
+            username: username,
+            password: password,
+            bio: bio,
+            email: email
+          };
+          _context2.next = 4;
           return fetch("http://localhost:3000/api/register", {
             method: "POST",
-            body: formData
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(inData)
           });
-        case 9:
+        case 4:
           response = _context2.sent;
           if (response.ok) {
-            _context2.next = 15;
+            _context2.next = 10;
             break;
           }
-          _context2.next = 13;
+          _context2.next = 8;
           return response.json();
-        case 13:
+        case 8:
           _errorData2 = _context2.sent;
           throw new Error(_errorData2.message || "Network response was not ok");
-        case 15:
-          _context2.next = 17;
+        case 10:
+          _context2.next = 12;
           return response.json();
-        case 17:
+        case 12:
           data = _context2.sent;
           if (!(data.message === "Registration successful")) {
-            _context2.next = 22;
+            _context2.next = 17;
             break;
           }
           return _context2.abrupt("return", true);
-        case 22:
+        case 17:
           return _context2.abrupt("return", false);
-        case 23:
-          _context2.next = 29;
+        case 18:
+          _context2.next = 24;
           break;
-        case 25:
-          _context2.prev = 25;
+        case 20:
+          _context2.prev = 20;
           _context2.t0 = _context2["catch"](0);
           console.error("There was a problem with the registration: ", _context2.t0);
           return _context2.abrupt("return", {
             error: "Failed to register: " + _context2.t0.message
           });
-        case 29:
+        case 24:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 25]]);
+    }, _callee2, null, [[0, 20]]);
   }));
   return _register.apply(this, arguments);
 }

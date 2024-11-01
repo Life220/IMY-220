@@ -37,18 +37,19 @@ export async function register(username, password, image, bio, email)
 {
     try
     {
-        const formData = new FormData();
-        formData.append("username", username);
-        formData.append("password", password);
-        formData.append("bio", bio);
-        formData.append("email", email);
-        if (image) {
-            formData.append("image", image, image.name);
-        }
-
+        const inData = {
+            username,
+            password,
+            bio,
+            email
+        };
+        
         const response = await fetch("http://localhost:3000/api/register", {
             method: "POST",
-            body: formData
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(inData)
         });
 
         if (!response.ok)
