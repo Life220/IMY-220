@@ -5097,7 +5097,7 @@ function login(_x, _x2) {
 }
 function _login() {
   _login = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(username, password) {
-    var response, errorData, data;
+    var response, _errorData, data;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -5122,8 +5122,8 @@ function _login() {
           _context.next = 7;
           return response.json();
         case 7:
-          errorData = _context.sent;
-          throw new Error(errorData.message || "Network response was not ok");
+          _errorData = _context.sent;
+          throw new Error(_errorData.message || "Network response was not ok");
         case 9:
           _context.next = 11;
           return response.json();
@@ -5159,7 +5159,7 @@ function register(_x3, _x4, _x5, _x6, _x7) {
 }
 function _register() {
   _register = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(username, password, image, bio, email) {
-    var formData, response, errorData, data;
+    var formData, response, _errorData2, data;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -5186,8 +5186,8 @@ function _register() {
           _context2.next = 13;
           return response.json();
         case 13:
-          errorData = _context2.sent;
-          throw new Error(errorData.message || "Network response was not ok");
+          _errorData2 = _context2.sent;
+          throw new Error(_errorData2.message || "Network response was not ok");
         case 15:
           _context2.next = 17;
           return response.json();
@@ -5223,7 +5223,7 @@ function getProfile(_x8) {
 }
 function _getProfile() {
   _getProfile = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(username) {
-    var response, errorData;
+    var response, data;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
@@ -5233,34 +5233,30 @@ function _getProfile() {
         case 3:
           response = _context3.sent;
           if (response.ok) {
-            _context3.next = 11;
+            _context3.next = 6;
             break;
           }
-          _context3.next = 7;
-          return response.json();
-        case 7:
-          errorData = _context3.sent;
-          if (!(errorData === false)) {
-            _context3.next = 10;
-            break;
-          }
-          return _context3.abrupt("return", false);
-        case 10:
           throw new Error(errorData.message || "Network response was not ok");
-        case 11:
-          return _context3.abrupt("return", false);
-        case 14:
-          _context3.prev = 14;
+        case 6:
+          _context3.next = 8;
+          return response.json();
+        case 8:
+          data = _context3.sent;
+          return _context3.abrupt("return", {
+            data: data
+          });
+        case 12:
+          _context3.prev = 12;
           _context3.t0 = _context3["catch"](0);
           console.error("There was a problem with fetching the profile for: " + username + ": ", _context3.t0);
           return _context3.abrupt("return", {
             error: "Failed to get the profile for: " + username
           });
-        case 18:
+        case 16:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[0, 14]]);
+    }, _callee3, null, [[0, 12]]);
   }));
   return _getProfile.apply(this, arguments);
 }
@@ -5672,20 +5668,27 @@ var Register = /*#__PURE__*/function (_React$Component) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            _this$state = _this.state, username = _this$state.username, password = _this$state.password, image = _this$state.image, bio = _this$state.bio, email = _this$state.email;
-            console.log("Get prof");
-            _context.next = 4;
-            return (0,_backend_api__WEBPACK_IMPORTED_MODULE_2__.getProfile)(username);
-          case 4:
-            response = _context.sent;
-            if (!(response === false)) {
-              _context.next = 13;
+            event.preventDefault();
+            _this$state = _this.state, username = _this$state.username, password = _this$state.password, image = _this$state.image, bio = _this$state.bio, email = _this$state.email; // Validate required fields
+            if (!(!username || !password || !email)) {
+              _context.next = 5;
               break;
             }
-            console.log("Start reg");
-            _context.next = 9;
+            alert("Please fill in all required fields.");
+            return _context.abrupt("return");
+          case 5:
+            _context.next = 7;
+            return (0,_backend_api__WEBPACK_IMPORTED_MODULE_2__.getProfile)(username);
+          case 7:
+            response = _context.sent;
+            if (!(response.data == "User not found")) {
+              _context.next = 16;
+              break;
+            }
+            console.log(response.error);
+            _context.next = 12;
             return (0,_backend_api__WEBPACK_IMPORTED_MODULE_2__.register)(username, password, image, bio, email);
-          case 9:
+          case 12:
             registered = _context.sent;
             if (registered) {
               alert("Registered succesfully, welcome " + username);
@@ -5694,12 +5697,12 @@ var Register = /*#__PURE__*/function (_React$Component) {
             } else {
               alert("An error occured when registering");
             }
-            _context.next = 15;
+            _context.next = 18;
             break;
-          case 13:
-            console.log("DID NOT Start reg");
+          case 16:
+            console.log(response);
             alert("Username already in use");
-          case 15:
+          case 18:
           case "end":
             return _context.stop();
         }
@@ -5723,7 +5726,7 @@ var Register = /*#__PURE__*/function (_React$Component) {
         password = _this$state2.password,
         bio = _this$state2.bio,
         email = _this$state2.email;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
         className: "flex flex-col w-52 align-center gap-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Profile Picture (optional)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "file",
@@ -5736,21 +5739,24 @@ var Register = /*#__PURE__*/function (_React$Component) {
         name: "email",
         value: email,
         onChange: this.handleInputChange,
-        placeholder: "john.wick@recordshare.com"
+        placeholder: "john.wick@recordshare.com",
+        required: true
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         className: "text-black",
         type: "text",
         name: "username",
         value: username,
         onChange: this.handleInputChange,
-        placeholder: "John1234"
+        placeholder: "John1234",
+        required: true
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Password"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         className: "text-black",
         type: "password",
         name: "password",
         value: password,
         onChange: this.handleInputChange,
-        placeholder: "********"
+        placeholder: "********",
+        required: true
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Bio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
         className: "text-black",
         type: "text",
@@ -5760,7 +5766,8 @@ var Register = /*#__PURE__*/function (_React$Component) {
         placeholder: "Boogie man"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "mt-2",
-        onClick: this.handleRegister
+        onClick: this.handleRegister,
+        type: "submit"
       }, "Register"));
     }
   }]);

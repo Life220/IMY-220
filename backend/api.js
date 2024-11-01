@@ -82,15 +82,11 @@ export async function getProfile(username)
 
         if (!response.ok)
         {
-            const errorData = await response.json();
-            if (errorData === false)
-                return false;
             throw new Error(errorData.message || "Network response was not ok");
         }
             
-        // const data = await response.json();
-        // return { data }; // Return a promise
-        return false;
+        const data = await response.json();
+        return { data }; // Return a promise
     }
     catch (error)
     {

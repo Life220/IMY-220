@@ -148,7 +148,7 @@ app.get("/api/user/:username", function (req, res) {
     if (user) {
       res.json(user);
     } else {
-      res.json(false);
+      res.json("User not found");
     }
   })["catch"](function (error) {
     return res.status(500).send(error);
