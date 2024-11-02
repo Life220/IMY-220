@@ -48,41 +48,39 @@ app.post("/api/login", /*#__PURE__*/function () {
           });
         case 4:
           user = _context.sent;
-          _context.t0 = user;
-          if (!_context.t0) {
-            _context.next = 10;
+          if (!user) {
+            _context.next = 15;
             break;
           }
-          _context.next = 9;
+          _context.next = 8;
           return bcrypt.compare(password, user.password);
-        case 9:
-          _context.t0 = _context.sent;
-        case 10:
-          if (!_context.t0) {
-            _context.next = 14;
+        case 8:
+          if (!_context.sent) {
+            _context.next = 12;
             break;
           }
-          res.json({
-            message: "Login successful"
-          });
-          _context.next = 15;
+          res.json("Login successful");
+          _context.next = 13;
           break;
-        case 14:
-          res.json({
-            message: "Invalid username or password"
-          });
+        case 12:
+          res.json("Incorrect password");
+        case 13:
+          _context.next = 16;
+          break;
         case 15:
-          _context.next = 20;
+          res.json("Username not found");
+        case 16:
+          _context.next = 21;
           break;
-        case 17:
-          _context.prev = 17;
-          _context.t1 = _context["catch"](1);
-          res.status(500).send(_context.t1);
-        case 20:
+        case 18:
+          _context.prev = 18;
+          _context.t0 = _context["catch"](1);
+          res.status(500).send(_context.t0);
+        case 21:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 17]]);
+    }, _callee, null, [[1, 18]]);
   }));
   return function (_x, _x2) {
     return _ref.apply(this, arguments);

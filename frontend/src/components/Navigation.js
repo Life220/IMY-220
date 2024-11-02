@@ -9,6 +9,7 @@ class Navigation extends React.Component
         this.state = {
             showNav: false,
         };
+
         this.toggleNavigation = this.toggleNavigation.bind(this);
         this.closeNavigation = this.closeNavigation.bind(this);
     }
@@ -27,8 +28,6 @@ class Navigation extends React.Component
 
     render()
     {
-        const username = localStorage.getItem("username");
-
         return (
             <div id="NavTab">
                 <button onClick={this.toggleNavigation}>
@@ -40,20 +39,11 @@ class Navigation extends React.Component
                     <div id="Navigation" onMouseLeave={this.closeNavigation}>
                         <h1>RecordShare</h1>
                         <nav>
-                            <Link to="/">Home</Link>
+                            <Link to="/main">Home</Link>
                         </nav>
                         <nav>
-                            {username ?
-                            (
-                                <button>Lougout</button>
-                            )
-                            :
-                            (
-                                <>
-                                    <Link to="/profile">Profile</Link>
-                                    <Link to="/login">Login/Register</Link>
-                                </>
-                            )}
+                            <Link to="/profile">Profile</Link>
+                            <Link to="/">Lougout</Link>
                         </nav>
                     </div>)
                 }

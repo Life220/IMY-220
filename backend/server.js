@@ -32,13 +32,16 @@ app.post("/api/login", async (req, res) => {
   try
   {
     const user = await db.collection("user").findOne({ username: username });
-    if (user && await bcrypt.compare(password, user.password))
+    if (user)
     {
-      res.json({ message: "Login successful" });
+      if (await bcrypt.compare(password, user.password))
+        res.json("Login successful");
+      else
+        res.json("Incorrect password");
     }
     else
     {
-      res.json({ message: "Invalid username or password" });
+      res.json("Username not found");
     }
   }
   catch (error)

@@ -1,6 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import Navigation from "../components/Navigation";
+import { Navigate } from "react-router-dom";
 import { getProfile, register } from "../../../backend/api";
 
 class Register extends React.Component
@@ -13,7 +12,8 @@ class Register extends React.Component
       password: "",
       bio: "",
       email: "",
-      image: null
+      image: null,
+      autherized: false
     };
   }
 
@@ -22,7 +22,7 @@ class Register extends React.Component
     this.setState({ [name]: value });
   };
 
-  handleRegister = async () => {
+  handleRegister = async (event) => {
     event.preventDefault();
     const { username, password, image, bio, email } = this.state;
 
@@ -43,7 +43,7 @@ class Register extends React.Component
       {
         alert("Registered succesfully, welcome " + username);
         localStorage.setItem("username", username);
-        // navigate("/");
+        this.setState({ autherized: true });
       }
       else
       {
@@ -59,27 +59,34 @@ class Register extends React.Component
 
   render()
   {
-    const { username, password, bio, email } = this.state;
+    const { username, password, bio, email, autherized } = this.state;
 
     return (
-      <form className="flex flex-col w-52 align-center gap-1">
-        <p>Profile Picture (optional)</p>
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-          onChange={this.handleImageChange}
-          />
-        <h3>Email</h3>
-        <input className="text-black" type="email" name="email" value={email} onChange={this.handleInputChange} placeholder="john.wick@recordshare.com" required></input>
-        <h3>Username</h3>
-        <input className="text-black" type="text" name="username" value={username} onChange={this.handleInputChange} placeholder="John1234" required></input>
-        <p>Password</p>
-        <input className="text-black" type="password" name="password" value={password} onChange={this.handleInputChange} placeholder="********" required></input>
-        <p>Bio</p>
-        <textarea className="text-black" type="text" name="bio" value={bio} onChange={this.handleInputChange} placeholder="Boogie man"></textarea>
-        <button className="mt-2" onClick={this.handleRegister} type="submit">Register</button>
-      </form>
+      autherized ?
+      (
+        <Navigate to="/main" />
+      )
+      :
+      (
+        <form className="flex flex-col w-52 align-center gap-1">
+          <p>Profile Picture (optional)</p>
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={this.handleImageChange}
+            />
+          <h3>Email</h3>
+          <input className="text-black" type="email" name="email" value={email} onChange={this.handleInputChange} placeholder="john.wick@recordshare.com" required></input>
+          <h3>Username</h3>
+          <input className="text-black" type="text" name="username" value={username} onChange={this.handleInputChange} placeholder="John1234" required></input>
+          <p>Password</p>
+          <input className="text-black" type="password" name="password" value={password} onChange={this.handleInputChange} placeholder="********" required></input>
+          <p>Bio</p>
+          <textarea className="text-black" type="text" name="bio" value={bio} onChange={this.handleInputChange} placeholder="Boogie man"></textarea>
+          <button className="mt-2" onClick={this.handleRegister} type="submit">Register</button>
+        </form>
+      )
     );
   }
 }
