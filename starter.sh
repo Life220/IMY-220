@@ -13,4 +13,5 @@ if [ -n "$CONTAINER_ID" ]; then
   docker rm $CONTAINER_ID
 fi
 
-docker run -p 3000:3000 recordshare
+# docker run -p 3000:3000 recordshare
+npm start
